@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediVault - Patient Secure Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "primary-hover": "#0fbaba",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c2c",
+                        "text-main": "#0f172a", 
+                        "text-muted": "#64748b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .dark .glass-panel {
+            background: rgba(26, 44, 44, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-slate-100 min-h-screen flex flex-col font-display antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 border-b border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-background-dark/95">
+<div class="max-w-7xl mx-auto">
+<div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+<div class="relative flex items-center justify-between">
+<a class="flex items-center gap-2 font-bold text-slate-900 dark:text-white text-xl" href="#">
+<div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-slate-900">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<span>MediVault</span>
+</a>
+<div class="flex items-center gap-4">
+<nav class="hidden md:flex gap-6 text-sm font-medium text-slate-700 dark:text-slate-200">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<a class="hover:text-primary transition-colors" href="#">Find a Doctor</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+<div class="flex gap-3 pl-4 border-l border-slate-200 dark:border-slate-700 ml-4">
+<button class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300">Staff Portal</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex items-center justify-center relative p-4 lg:p-8">
+<!-- Background Decorative Elements -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-3xl"></div>
+<div class="absolute bottom-[10%] left-[5%] w-[30%] h-[30%] rounded-full bg-blue-400/10 blur-3xl"></div>
+</div>
+<div class="w-full max-w-6xl mx-auto z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch min-h-[600px] bg-white dark:bg-surface-dark rounded-2xl shadow-2xl overflow-hidden border border-slate-100 dark:border-slate-800">
+<!-- Left Side: Login Form -->
+<div class="p-8 lg:p-12 flex flex-col justify-center relative">
+<div class="max-w-md mx-auto w-full">
+<div class="mb-8">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Patient Access</h1>
+<p class="text-slate-500 dark:text-slate-400">Securely manage your health records and emergency data.</p>
+</div>
+<!-- Tabs -->
+<div class="flex p-1 space-x-1 bg-slate-100 dark:bg-slate-800/50 rounded-lg mb-8" role="tablist">
+<button aria-selected="true" class="w-full py-2.5 text-sm font-medium leading-5 text-slate-900 dark:text-slate-900 bg-white shadow rounded-md ring-1 ring-black/5 dark:ring-white/10 dark:bg-primary" role="tab">
+                            Log In
+                        </button>
+<button aria-selected="false" class="w-full py-2.5 text-sm font-medium leading-5 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200" role="tab">
+                            Register
+                        </button>
+</div>
+<!-- Login Form -->
+<form action="#" class="space-y-5">
+<div class="space-y-1">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="email">Email Address</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow sm:text-sm" id="email" placeholder="name@example.com" type="email" value=""/>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="password">Password</label>
+<a class="text-sm font-medium text-primary hover:text-primary-hover hover:underline" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</span>
+<input class="block w-full pl-10 pr-10 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow sm:text-sm" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="pt-2">
+<button class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-bold rounded-lg text-slate-900 bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all shadow-lg shadow-primary/25" type="button">
+<span class="absolute left-0 inset-y-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-slate-900 group-hover:scale-110 transition-transform text-[20px]">lock_open</span>
+</span>
+                                Secure Sign In
+                            </button>
+</div>
+</form>
+<div class="mt-8 text-center">
+<div class="relative">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-slate-700"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-2 bg-white dark:bg-surface-dark text-slate-500">Need help?</span>
+</div>
+</div>
+<div class="mt-4 flex justify-center gap-4 text-sm text-slate-500">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">contact_support</span> Contact Support
+                             </a>
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">verified_user</span> Security Policy
+                             </a>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Info & Image -->
+<div class="relative hidden lg:flex flex-col bg-slate-50 dark:bg-slate-800 overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Blurred modern hospital corridor background" class="w-full h-full object-cover opacity-60 dark:opacity-40 grayscale-[20%]" data-alt="Blurred modern hospital corridor background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHk4EpKAbGzZiuXhAz2RjgE6UTspUVfroXj89wz-ztXrBZ1SgmbrwGbwZ_xCF7cFaum-Bfp2lYjgfCA1WiInlSwJc1KjTGiGVCRTyBIkfq5wzTi7bgAKO7q409DqJzAJWbXVP9sypsTpdHs2ynBiq4_NkjFvgZ0vZAUjKn_m2IMHr2Lv36-aaAvBrxQbW6hc1XEEJXMzU6iDzfC5Rv6n3fpM8wPVnUfJP27ktQ8iN3w7vSJqTYVDJDLU_FaFaahwyrPNqs96ZTw4w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/20 mix-blend-multiply"></div>
+</div>
+<div class="relative z-10 flex-1 flex flex-col justify-end p-12 text-white">
+<div class="mb-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary rounded-xl shrink-0 text-slate-900">
+<span class="material-symbols-outlined text-[32px]">qr_code_scanner</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-1">Emergency Access QR</h3>
+<p class="text-slate-200 text-sm leading-relaxed">
+                                    Your account automatically generates a secure QR code. In an emergency, first responders can scan it to instantly access your critical allergies, medications, and blood type.
+                                </p>
+<div class="mt-4 flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">shield</span>
+<span>HIPAA Compliant Secure Vault</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-white/10 pt-6">
+<div>
+<p class="text-sm font-semibold">MediVault Systems</p>
+<p class="text-xs text-slate-400">v4.2.0 • Secure Connection</p>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-700 flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-primary flex items-center justify-center text-slate-900 text-[10px] font-bold">AS</div>
+<div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-600 flex items-center justify-center text-[10px] font-bold">+2k</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- 2FA Overlay (Visually Simulated as if triggered) -->
+<!-- In a real app, this would be toggled via JS. Here it is positioned absolutely to show the design -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300 pointer-events-none opacity-0"> <!-- Change opacity-0 to opacity-100 to see it, or remove pointer-events-none -->
+<div class="w-full max-w-md bg-white dark:bg-surface-dark rounded-2xl shadow-2xl p-8 border border-slate-100 dark:border-slate-700 transform scale-100 transition-transform">
+<div class="text-center mb-6">
+<div class="mx-auto w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined text-[24px]">phonelink_lock</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Two-Factor Authentication</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                    We've sent a 6-digit verification code to your registered mobile number ending in <span class="font-semibold text-slate-900 dark:text-slate-200">**89</span>.
+                </p>
+</div>
+<div class="space-y-6">
+<div class="flex justify-center gap-2">
+<!-- OTP Inputs -->
+<input class="w-12 h-14 text-center text-2xl font-bold rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" maxlength="1" type="text" value="3"/>
+<input autofocus="" class="w-12 h-14 text-center text-2xl font-bold rounded-lg border border-primary dark:border-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all ring-2 ring-primary/20" maxlength="1" type="text"/>
+<input class="w-12 h-14 text-center text-2xl font-bold rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" maxlength="1" type="text"/>
+<input class="w-12 h-14 text-center text-2xl font-bold rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" maxlength="1" type="text"/>
+<input class="w-12 h-14 text-center text-2xl font-bold rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" maxlength="1" type="text"/>
+<input class="w-12 h-14 text-center text-2xl font-bold rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" maxlength="1" type="text"/>
+</div>
+<button class="w-full py-3 px-4 bg-primary hover:bg-primary-hover text-slate-900 font-bold rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    Verify &amp; Proceed <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<div class="text-center text-sm">
+<span class="text-slate-500">Didn't receive the code?</span>
+<button class="font-semibold text-primary hover:underline ml-1">Resend Code (30s)</button>
+</div>
+</div>
+</div>
+</div>
+<!-- End 2FA Overlay -->
+<footer class="bg-white border-t border-slate-200 dark:bg-background-dark dark:border-slate-800 py-6">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+<p>© 2024 MediVault Health Systems. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Privacy</a>
+<a class="hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Terms</a>
+<a class="hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Cookies</a>
+</div>
+</div>
+</footer>
+</body></html>

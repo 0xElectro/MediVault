@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediVault - Patient Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "primary-dark": "#0ea5a5", 
+                        "primary-light": "#ccfbfb",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "text-primary": "#111818",
+                        "text-secondary": "#618989",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-primary dark:text-white font-display antialiased min-h-screen flex overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-[#1a2c2c] border-r border-gray-200 dark:border-[#2d3f3f] flex-shrink-0 hidden md:flex flex-col h-screen">
+<div class="h-16 flex items-center px-6 border-b border-gray-100 dark:border-[#2d3f3f]">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary-dark">local_hospital</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">MediVault</h1>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-6">
+<!-- User Profile Snippet -->
+<div class="flex items-center gap-3 px-2">
+<div class="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 bg-cover bg-center" data-alt="Portrait of a male patient" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCup1vg6McxTEAWtTTPIrVrHr9_ZxFrbG_vanPpB7DntRWmhNlT1H1Az2JnoB_WlJ4oLXdJkTT1FyDrdiyZEDG4XzIUdmha-aF8bhH6V-jB75O1CkYN4tc3dabCGLeCwVOlNVY_TRXIIAQte0HNRHWgsVnB81GwmzdfyImnLu-XvdRuZobUPqUSj9hEQLNLJM2DrE7OQ9saegjbVBvQb63QdhQSN0Fjoh82X5raN-ZfFMTz4Ct6jIbhkf_6bzmXLWozH2YFBvitPrs')"></div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-white">John Doe</span>
+<span class="text-xs text-text-secondary">Patient ID: #83921</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary-dark dark:text-primary font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>My Records</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span>Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">medication</span>
+<span>Prescriptions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span>Lab Results</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">family_restroom</span>
+<span>Family Access</span>
+</a>
+</nav>
+<div class="mt-auto">
+<div class="px-3 mb-2 text-xs font-semibold text-text-secondary uppercase tracking-wider">Settings</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Account</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-[#253838] transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help &amp; Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<!-- Top Header -->
+<header class="h-16 bg-white/80 dark:bg-[#1a2c2c]/80 backdrop-blur-md border-b border-gray-200 dark:border-[#2d3f3f] flex items-center justify-between px-6 sticky top-0 z-20">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white hidden md:block">Health Overview</h2>
+<button class="md:hidden p-2 -ml-2 text-slate-600">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-[#1a2c2c]"></span>
+</button>
+<div class="h-8 w-px bg-gray-200 dark:bg-gray-700 mx-1"></div>
+<button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-red-200 dark:shadow-none transition-all animate-pulse">
+<span class="material-symbols-outlined">emergency</span>
+<span>EMERGENCY SOS</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto space-y-6">
+<!-- Welcome Banner -->
+<div class="rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 dark:from-[#253838] dark:to-[#1a2c2c] p-6 md:p-10 text-white relative overflow-hidden shadow-xl">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary opacity-10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+<div class="relative z-10 max-w-2xl">
+<h1 class="text-3xl font-bold mb-2">Welcome back, John</h1>
+<p class="text-slate-300 text-lg mb-6">Here is your daily health summary. Your next appointment is in 2 days.</p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-primary">bloodtype</span>
+<span class="font-medium">Type A+</span>
+</div>
+<div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-primary">height</span>
+<span class="font-medium">180 cm</span>
+</div>
+<div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-primary">monitor_weight</span>
+<span class="font-medium">75 kg</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Left Column (Main Info) -->
+<div class="md:col-span-8 space-y-6">
+<!-- Critical Alerts Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Allergies Card -->
+<div class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-5 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-red-100 dark:bg-red-900/30 rounded-lg text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h3 class="font-bold text-red-900 dark:text-red-100">Allergies</h3>
+</div>
+<button class="text-xs font-semibold text-red-600 hover:text-red-700 dark:text-red-400">EDIT</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between bg-white dark:bg-[#1a2c2c] p-3 rounded-lg border border-red-100 dark:border-red-900/20">
+<span class="font-medium text-slate-800 dark:text-slate-200">Penicillin</span>
+<span class="text-xs px-2 py-1 bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 rounded-full font-bold">SEVERE</span>
+</div>
+<div class="flex items-center justify-between bg-white dark:bg-[#1a2c2c] p-3 rounded-lg border border-red-100 dark:border-red-900/20">
+<span class="font-medium text-slate-800 dark:text-slate-200">Peanuts</span>
+<span class="text-xs px-2 py-1 bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 rounded-full font-bold">MODERATE</span>
+</div>
+</div>
+</div>
+<!-- Chronic Conditions -->
+<div class="bg-white dark:bg-[#1a2c2c] border border-gray-100 dark:border-[#2d3f3f] rounded-xl p-5 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined">healing</span>
+</div>
+<h3 class="font-bold text-slate-900 dark:text-white">Chronic Conditions</h3>
+</div>
+</div>
+<ul class="space-y-2">
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 p-2 hover:bg-gray-50 dark:hover:bg-[#253838] rounded-lg transition-colors">
+<div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                                        Hypertension (High Blood Pressure)
+                                    </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300 p-2 hover:bg-gray-50 dark:hover:bg-[#253838] rounded-lg transition-colors">
+<div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                                        Asthma
+                                    </li>
+</ul>
+</div>
+</div>
+<!-- Medications -->
+<div class="bg-white dark:bg-[#1a2c2c] border border-gray-100 dark:border-[#2d3f3f] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-slate-900 dark:text-white text-lg">Current Medications</h3>
+<button class="text-primary-dark hover:text-primary font-medium text-sm">See all history</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-gray-100 dark:border-[#2d3f3f]">
+<th class="pb-3 pl-2">Medication</th>
+<th class="pb-3">Dosage</th>
+<th class="pb-3">Frequency</th>
+<th class="pb-3">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-gray-50 dark:border-[#253838] hover:bg-gray-50 dark:hover:bg-[#253838/50] transition-colors">
+<td class="py-4 pl-2 font-medium text-slate-900 dark:text-slate-200">Lisinopril</td>
+<td class="py-4 text-slate-500">10mg</td>
+<td class="py-4 text-slate-500">Once daily</td>
+<td class="py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">Active</span></td>
+</tr>
+<tr class="border-b border-gray-50 dark:border-[#253838] hover:bg-gray-50 dark:hover:bg-[#253838/50] transition-colors">
+<td class="py-4 pl-2 font-medium text-slate-900 dark:text-slate-200">Albuterol Inhaler</td>
+<td class="py-4 text-slate-500">90mcg</td>
+<td class="py-4 text-slate-500">As needed</td>
+<td class="py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">Active</span></td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-[#253838/50] transition-colors">
+<td class="py-4 pl-2 font-medium text-slate-900 dark:text-slate-200">Vitamin D</td>
+<td class="py-4 text-slate-500">1000 IU</td>
+<td class="py-4 text-slate-500">Once daily</td>
+<td class="py-4"><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">Optional</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column (Access & Contacts) -->
+<div class="md:col-span-4 space-y-6">
+<!-- Emergency Access Card -->
+<div class="bg-white dark:bg-[#1a2c2c] border border-gray-200 dark:border-[#2d3f3f] rounded-xl p-6 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+<div class="absolute top-0 w-full h-1 bg-primary"></div>
+<div class="bg-primary/10 p-3 rounded-full mb-4">
+<span class="material-symbols-outlined text-primary-dark text-3xl">qr_code_2</span>
+</div>
+<h3 class="font-bold text-slate-900 dark:text-white text-lg mb-1">Emergency Access</h3>
+<p class="text-sm text-slate-500 mb-6 px-4">Paramedics can scan this to view your critical health data instantly.</p>
+<div class="bg-white p-3 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 mb-6">
+<img alt="Emergency QR Code" class="w-32 h-32" data-alt="QR Code for emergency medical access" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD2rMFZpYSJ9ofxNQrYK8SmCiKeYqZw-SvIH7DFZhtKNsw9Qugr4IhEbilkvGiNbuDog5yS9JDt3JAcvs8OR5uYEyxIKOAvv7YOwUsSUjX_wjG2UKPbDDKT6PVuPMuBqnG6T2iTLPatjSX-VBY2Kq6OAbxD-yYc8U0UhHZi16JlfZnZA52Rb_oUMRskg-8sr4qMtWOF87OzGZLqCONiy8BDuWrwv0H5EUWjFVaBvlwQmxyDNXHTv21gTogQuV8axdrdykMSuzVhdg"/>
+</div>
+<div class="flex flex-col gap-3 w-full">
+<button class="w-full py-2.5 bg-primary hover:bg-primary-dark hover:text-white text-slate-900 font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">share</span>
+                                    Share Access
+                                </button>
+<button class="w-full py-2.5 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-slate-700 dark:text-slate-200 font-semibold rounded-lg transition-all flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-700">
+<span class="material-symbols-outlined text-xl">download</span>
+                                    Download Card
+                                </button>
+</div>
+<div class="mt-4 flex items-center gap-1.5 text-xs text-slate-400">
+<span class="material-symbols-outlined text-sm">lock</span>
+                                Encrypted &amp; Secure
+                            </div>
+</div>
+<!-- Emergency Contacts -->
+<div class="bg-white dark:bg-[#1a2c2c] border border-gray-100 dark:border-[#2d3f3f] rounded-xl p-6 shadow-sm">
+<h3 class="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500">contact_phone</span>
+                                Emergency Contacts
+                            </h3>
+<div class="space-y-4">
+<!-- Contact 1 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold">
+                                            JD
+                                        </div>
+<div>
+<p class="font-semibold text-sm text-slate-900 dark:text-slate-100">Jane Doe</p>
+<p class="text-xs text-slate-500">Wife</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="h-8 w-8 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 flex items-center justify-center hover:bg-green-100 transition-colors">
+<span class="material-symbols-outlined text-sm">call</span>
+</button>
+</div>
+</div>
+<div class="h-px bg-gray-100 dark:bg-[#2d3f3f]"></div>
+<!-- Contact 2 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold">
+                                            RD
+                                        </div>
+<div>
+<p class="font-semibold text-sm text-slate-900 dark:text-slate-100">Robert Doe</p>
+<p class="text-xs text-slate-500">Brother</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="h-8 w-8 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 flex items-center justify-center hover:bg-green-100 transition-colors">
+<span class="material-symbols-outlined text-sm">call</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-5 py-2 text-sm text-primary-dark font-medium border border-dashed border-primary/30 rounded-lg hover:bg-primary/5 transition-colors">
+                                + Add New Contact
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
