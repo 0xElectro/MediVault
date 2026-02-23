@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MediVault - Patient Prescriptions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "primary-dark": "#0ebdbd",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#182c2c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-slate-900 dark:text-slate-100 antialiased selection:bg-primary/30">
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-6 py-3 shadow-sm">
+        <div class="flex items-center gap-8">
+            <div class="flex items-center gap-3">
+                <div class="size-8 text-primary">
+                    <svg class="h-full w-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight">MediVault</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-1">
+                <a class="text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    href="#">Dashboard</a>
+                <a class="text-primary bg-primary/10 px-3 py-2 rounded-lg text-sm font-medium"
+                    href="#">Prescriptions</a>
+                <a class="text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    href="#">Messages</a>
+                <a class="text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    href="#">Appointments</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-6">
+            <label class="hidden lg:flex items-center relative min-w-64">
+                <span class="absolute left-3 text-slate-400 material-symbols-outlined text-[20px]">search</span>
+                <input
+                    class="w-full rounded-full border-none bg-slate-100 dark:bg-slate-800 py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
+                    placeholder="Search medications, doctors..." />
+            </label>
+            <button class="relative text-slate-500 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">notifications</span>
+                <span
+                    class="absolute top-0 right-0 size-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-surface-dark"></span>
+            </button>
+            <div
+                class="h-10 w-10 overflow-hidden rounded-full border-2 border-slate-100 dark:border-slate-700 bg-slate-200">
+                <img alt="User Avatar" class="h-full w-full object-cover" data-alt="Portrait of a smiling man"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRUdWulGEvYJSeqfiBfbwgJWwlZfE19ez7uzybtNAGKtFdLkc98SLssNwR-Lkx6Bl7tJcrLKyjYEm44W2m9DPzH8XHiJdzHhG7F3gbE4nxG-lXmaK8t5q5xA9huoSeKynvEq9E877OYy8elUZsqQtHbwOZ6rTlxSktAPZwvIL5_nRi4QQ539u6YnC0l_OzOcEJmc7UeZU2EWY0pvxx_0wmENSZ4ehadDdCeS0ePeuP07Z3ayhQEuaZjH4wnPSyfoqh9NX5NPBMtgg" />
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 px-4 md:px-8 py-8 w-full max-w-[1440px] mx-auto">
+        <!-- Breadcrumbs & Header -->
+        <div class="mb-8 flex flex-col gap-2">
+            <nav class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-2">
+                <a class="hover:text-primary transition-colors" href="#">Home</a>
+                <span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+                <span class="font-medium text-slate-900 dark:text-slate-100">Prescriptions</span>
+            </nav>
+            <div class="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">My
+                        Prescriptions</h1>
+                    <p class="mt-2 text-slate-500 dark:text-slate-400 max-w-2xl">Manage your current medications,
+                        request refills, and view your prescription history all in one place.</p>
+                </div>
+                <button
+                    class="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                    New Request
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Column: Filters & Grid -->
+            <div class="flex-1 min-w-0">
+                <!-- Filter Bar -->
+                <div
+                    class="mb-6 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-2 shadow-sm border border-slate-200 dark:border-slate-800">
+                    <div class="flex gap-1">
+                        <button
+                            class="rounded-lg bg-primary/10 px-4 py-2 text-sm font-semibold text-primary-dark dark:text-primary">Current</button>
+                        <button
+                            class="rounded-lg px-4 py-2 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors">Past
+                            History</button>
+                    </div>
+                    <div class="flex items-center gap-3 px-2">
+                        <span class="text-sm text-slate-500 dark:text-slate-400">Sort by:</span>
+                        <select
+                            class="rounded-lg border-none bg-transparent py-1 pl-2 pr-8 text-sm font-semibold text-slate-900 focus:ring-0 dark:text-white cursor-pointer">
+                            <option>Date Prescribed</option>
+                            <option>Doctor Name</option>
+                            <option>Medication Name</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Prescription Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
+                    <!-- Card 1 -->
+                    <div
+                        class="group relative flex flex-col justify-between rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="absolute right-4 top-4">
+                            <span
+                                class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                Active
+                            </span>
+                        </div>
+                        <div class="flex items-start gap-4 mb-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary-dark dark:text-primary">
+                                <span class="material-symbols-outlined text-[28px]">pill</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Amoxicillin</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">500mg • Tablet</p>
+                            </div>
+                        </div>
+                        <div class="mb-6 space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">schedule</span> Frequency
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">Twice daily</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">calendar_month</span> Prescribed
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">Oct 24, 2023</span>
+                            </div>
+                            <div
+                                class="flex items-center justify-between text-sm pt-2 border-t border-slate-100 dark:border-slate-800">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">stethoscope</span> Doctor
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <img alt="Dr. Sarah Smith" class="h-6 w-6 rounded-full object-cover"
+                                        data-alt="Portrait of a female doctor in white coat"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWwETsQiLOKH8tZbS-rBhjquj4SdNXYzbCdDCuTWzfsCytONayvZFeedXbtYlF5-U6MNWjcBpm805y2cnpEN5mlw63HKPfDSwk2bQuhme5lB2hxHtj5ZtbKnNZjmrABB1GV5EeG2Ob3VVvN1LmJJSKBBlcrOmeMISewnjmwzo6LceWPZWhtujodCooo0yswDbb-llYagXr5WnspHYifYWNsLGczmZToXrf1dDqBb8J45iDCWtf7o2OzV8nocassXFCSQMONRFsefc" />
+                                    <span class="font-medium text-slate-900 dark:text-white">Dr. Sarah Smith</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <button
+                                class="flex-1 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-slate-900 hover:bg-primary-dark transition-colors">
+                                Request Refill
+                            </button>
+                            <button aria-label="Download PDF"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 hover:text-primary dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">download</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div
+                        class="group relative flex flex-col justify-between rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="absolute right-4 top-4">
+                            <span
+                                class="inline-flex items-center rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                Active
+                            </span>
+                        </div>
+                        <div class="flex items-start gap-4 mb-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                                <span class="material-symbols-outlined text-[28px]">medication_liquid</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Lisinopril</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">10mg • Oral Solution
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-6 space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">schedule</span> Frequency
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">Once daily</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">calendar_month</span> Prescribed
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">Sep 15, 2023</span>
+                            </div>
+                            <div
+                                class="flex items-center justify-between text-sm pt-2 border-t border-slate-100 dark:border-slate-800">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">stethoscope</span> Doctor
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <img alt="Dr. John Doe" class="h-6 w-6 rounded-full object-cover"
+                                        data-alt="Portrait of a male doctor smiling"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQsmajcwKjiX4Pkb_0ni4Mb7wFmHS62VY8j2raR-s9FKiFiPQw9sZWMteWq1es_sRRD0pm2_O_Kfg6Zp5cXqa4eZ3c_66KtSfNf1976UAY6U_GRisCoUnLyvY_4NMGHy7PBhG6F1nFP3MIVoHCZvrF7faCGOAdeA52FqgLPoxN9LuRrs9-lXq4hUEGPBn2RUEoygz5wIqgoNAG8GE_M9YQZ3GD7tyFwpy6biw1qbKi8mCHNHAqOReu4nXDhAy551ejSovOE5ewYqE" />
+                                    <span class="font-medium text-slate-900 dark:text-white">Dr. John Doe</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <button
+                                class="flex-1 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-slate-900 hover:bg-primary-dark transition-colors">
+                                Request Refill
+                            </button>
+                            <button aria-label="Download PDF"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 hover:text-primary dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">download</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div
+                        class="group relative flex flex-col justify-between rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="absolute right-4 top-4">
+                            <span
+                                class="inline-flex items-center rounded-full bg-yellow-50 dark:bg-yellow-900/30 px-2.5 py-0.5 text-xs font-semibold text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800">
+                                Refill Soon
+                            </span>
+                        </div>
+                        <div class="flex items-start gap-4 mb-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">
+                                <span class="material-symbols-outlined text-[28px]">vaccines</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Atorvastatin</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">20mg • Tablet</p>
+                            </div>
+                        </div>
+                        <div class="mb-6 space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">schedule</span> Frequency
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">Once daily at bedtime</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">calendar_month</span> Prescribed
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">Aug 02, 2023</span>
+                            </div>
+                            <div
+                                class="flex items-center justify-between text-sm pt-2 border-t border-slate-100 dark:border-slate-800">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">stethoscope</span> Doctor
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <img alt="Dr. Sarah Smith" class="h-6 w-6 rounded-full object-cover"
+                                        data-alt="Portrait of a female doctor in white coat"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOSvEqM7Innnvp-_amMy-jBs93YPYaRXPKuRLqQrov8RvM2hO-dbGiANCZkgZgajTf9UX6OVx5luFmRjkTZSkPsz4JN5j-CYM7IisdtR-OOivpaprjGvuHVN0PSJ1sMBb1YtvvF1hdf8nVvVCve5HGayYdebt2iLt1bNgJGU3mRaLeFacLnoxYYz2_Oxmmf3p0f9tYXOZ-3p_fYKljjRP4JWXDbjxNPD0sUWXI2oZRaX9vdmyz-uktdlSfC3OlpU0oH0rouWDFf70" />
+                                    <span class="font-medium text-slate-900 dark:text-white">Dr. Sarah Smith</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <button
+                                class="flex-1 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-slate-900 hover:bg-primary-dark transition-colors">
+                                Request Refill
+                            </button>
+                            <button aria-label="Download PDF"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 hover:text-primary dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">download</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div
+                        class="group relative flex flex-col justify-between rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="absolute right-4 top-4">
+                            <span
+                                class="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-xs font-semibold text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                0 Refills Left
+                            </span>
+                        </div>
+                        <div class="flex items-start gap-4 mb-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                                <span class="material-symbols-outlined text-[28px]">prescriptions</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Ibuprofen</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">800mg • Tablet</p>
+                            </div>
+                        </div>
+                        <div class="mb-6 space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">schedule</span> Frequency
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">As needed for pain</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">calendar_month</span> Prescribed
+                                </span>
+                                <span class="font-medium text-slate-900 dark:text-white">July 10, 2023</span>
+                            </div>
+                            <div
+                                class="flex items-center justify-between text-sm pt-2 border-t border-slate-100 dark:border-slate-800">
+                                <span class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                                    <span class="material-symbols-outlined text-[18px]">stethoscope</span> Doctor
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <img alt="Dr. Michael Chang" class="h-6 w-6 rounded-full object-cover"
+                                        data-alt="Portrait of a doctor with glasses"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHuXKysYj6Q3VRb266hOiOVQcFU0BMYwGtNKAGUqO1-cyhpKAUyd0t6rAV3dmYWCsHu2GMWJHnHwutLBxilBCFQgsBgitKg8xo9LGOSBRw51X_9I8cDIsYSTjOENvjVb3qdEFT4e092hqL4sIOpsyxbR3v9FVG8S66kAdkvmadSIEJmCZlG0DMqOQu8e9FOy-p1k4pG8Bno2d_PeGVF6t4s_Vt2F0myR9bwpHd6bziSTnoerwTpcWXs9KFa26YeY31uXwFwXA8Nnk" />
+                                    <span class="font-medium text-slate-900 dark:text-white">Dr. Michael Chang</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <button
+                                class="flex-1 rounded-lg bg-slate-100 dark:bg-slate-800 px-4 py-2 text-sm font-bold text-slate-400 dark:text-slate-500 cursor-not-allowed"
+                                disabled="">
+                                Contact Doctor
+                            </button>
+                            <button aria-label="Download PDF"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 hover:text-primary dark:text-slate-400 dark:hover:bg-slate-800 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">download</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Sidebar Stats -->
+            <aside class="w-full lg:w-80 flex flex-col gap-6 shrink-0">
+                <!-- Active Meds Widget -->
+                <div
+                    class="rounded-xl bg-gradient-to-br from-primary to-[#0ebdbd] p-6 text-slate-900 shadow-lg relative overflow-hidden group">
+                    <div
+                        class="absolute right-[-20px] top-[-20px] opacity-20 transform rotate-12 transition-transform group-hover:rotate-45 duration-700">
+                        <span class="material-symbols-outlined text-[140px]">medication</span>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-sm font-semibold uppercase tracking-wider opacity-80">Active Scripts</h3>
+                        <div class="mt-2 flex items-baseline gap-2">
+                            <span class="text-5xl font-black">4</span>
+                            <span class="text-lg font-medium">medications</span>
+                        </div>
+                        <p class="mt-2 text-sm font-medium opacity-90">2 refills available this month.</p>
+                        <div class="mt-6 flex gap-2">
+                            <div class="h-1.5 flex-1 rounded-full bg-black/20 overflow-hidden">
+                                <div class="h-full w-3/4 rounded-full bg-white"></div>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-xs font-semibold opacity-70">75% Adherence</p>
+                    </div>
+                </div>
+                <!-- Pharmacy Details -->
+                <div
+                    class="rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Pharmacy Details</h3>
+                        <button class="text-primary text-sm font-semibold hover:underline">Edit</button>
+                    </div>
+                    <div class="flex items-start gap-4 mb-4">
+                        <div
+                            class="size-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0 text-red-600 dark:text-red-400">
+                            <span class="material-symbols-outlined text-[24px]">local_pharmacy</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-900 dark:text-white">CVS Pharmacy #4322</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Primary Choice</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-slate-400 text-[20px] mt-0.5">location_on</span>
+                            <p class="text-sm text-slate-600 dark:text-slate-300">123 Main St, Suite
+                                100<br />Springfield, IL 62704</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-slate-400 text-[20px]">call</span>
+                            <p class="text-sm text-slate-600 dark:text-slate-300">(555) 123-4567</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-slate-400 text-[20px]">schedule</span>
+                            <p class="text-sm text-slate-600 dark:text-slate-300"><span
+                                    class="text-green-600 font-medium">Open</span> • Closes 9 PM</p>
+                        </div>
+                    </div>
+                    <button
+                        class="mt-6 w-full rounded-lg border border-slate-200 dark:border-slate-700 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        View on Map
+                    </button>
+                </div>
+                <!-- Quick Actions -->
+                <div
+                    class="rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Quick Links</h3>
+                    <div class="flex flex-col gap-2">
+                        <a class="flex items-center justify-between rounded-lg p-3 hover:bg-slate-50 dark:hover:bg-slate-800 group transition-colors"
+                            href="#">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">history</span>
+                                <span
+                                    class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Order
+                                    History</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-[16px]">chevron_right</span>
+                        </a>
+                        <a class="flex items-center justify-between rounded-lg p-3 hover:bg-slate-50 dark:hover:bg-slate-800 group transition-colors"
+                            href="#">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">credit_card</span>
+                                <span
+                                    class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Insurance
+                                    Cards</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-[16px]">chevron_right</span>
+                        </a>
+                        <a class="flex items-center justify-between rounded-lg p-3 hover:bg-slate-50 dark:hover:bg-slate-800 group transition-colors"
+                            href="#">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">help</span>
+                                <span
+                                    class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Help
+                                    Center</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-[16px]">chevron_right</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+</body>
+
+</html>
