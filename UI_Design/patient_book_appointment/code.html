@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MediVault - Patient Appointment Management</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="layout-container flex h-full grow flex-col">
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-6 md:px-10 py-3 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100">
+                    <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-slate-900">
+                        <span class="material-symbols-outlined text-2xl font-bold">medical_services</span>
+                    </div>
+                    <h2 class="text-xl font-bold leading-tight tracking-tight">MediVault</h2>
+                </div>
+                <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+                    <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                        <div class="text-slate-400 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg"
+                            data-icon="search">
+                            <span class="material-symbols-outlined">search</span>
+                        </div>
+                        <input
+                            class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-slate-800 focus:ring-0 h-full placeholder:text-slate-500 px-4 rounded-r-lg text-sm"
+                            placeholder="Search appointments or doctors" value="" />
+                    </div>
+                </label>
+            </div>
+            <div class="flex flex-1 justify-end gap-6 items-center">
+                <nav class="hidden lg:flex items-center gap-6">
+                    <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium"
+                        href="#">Dashboard</a>
+                    <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Appointments</a>
+                    <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium"
+                        href="#">Messages</a>
+                    <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium"
+                        href="#">Records</a>
+                </nav>
+                <div class="flex gap-3">
+                    <button
+                        class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <button
+                        class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                        <span class="material-symbols-outlined">settings</span>
+                    </button>
+                    <div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border-2 border-primary">
+                        <img alt="User Avatar" class="w-full h-full object-cover"
+                            data-alt="Portrait of a female patient smiling"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSkavLdaP41WARj0O53y6jFond1-EOgoj_nN_t0onMdfxeN8MQHPl7_Tgf1d5ie-B5HuiOVU4ZWrqwIrL_Y5BEGSnRZz2klD3Xv4ZRGI9-pZtRZskXuvTjrJVJspvKJeYfaluY-H1Lp4hfrQZZbC77r0WyU0_5dGsf1E0iw6DUL5iFdEQJSzdZV0h_cVE8INv1UkbdFbSqezQzBUhk3E7ssbifo6vLlTkzPsghuRndXEWpMAyjyXDqZpWfAj-azBjb5JhO52j4dAE" />
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 max-w-7xl mx-auto w-full px-6 md:px-10 py-8">
+            <nav class="flex items-center gap-2 mb-4 text-slate-500 dark:text-slate-400">
+                <a class="flex items-center gap-1.5 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined !text-[20px]">home</span>
+                    <span class="text-sm font-medium">Home</span>
+                </a>
+                <span class="material-symbols-outlined !text-[18px]">chevron_right</span>
+                <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Patient Appointments</span>
+            </nav>
+            <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+                <div class="flex flex-col gap-1">
+                    <h1 class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-slate-100">Your
+                        Appointments</h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-base">Manage your healthcare schedule and
+                        consultations.</p>
+                </div>
+                <button
+                    class="flex items-center gap-2 px-6 py-3 bg-primary hover:brightness-95 text-slate-900 rounded-xl font-bold transition-all shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    <span>Schedule New Appointment</span>
+                </button>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="flex-1 flex flex-col gap-6">
+                    <div class="border-b border-slate-200 dark:border-slate-800">
+                        <nav class="flex gap-8">
+                            <button
+                                class="border-b-4 border-primary text-slate-900 dark:text-white pb-4 px-1 text-sm font-bold tracking-wide flex items-center gap-2">
+                                Upcoming <span
+                                    class="bg-primary/20 text-slate-900 dark:text-primary px-2 py-0.5 rounded-full text-xs">3</span>
+                            </button>
+                            <button
+                                class="border-b-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 pb-4 px-1 text-sm font-bold tracking-wide">
+                                Past
+                            </button>
+                            <button
+                                class="border-b-4 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 pb-4 px-1 text-sm font-bold tracking-wide">
+                                Cancelled
+                            </button>
+                        </nav>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div
+                            class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl p-5 hover:shadow-md transition-shadow">
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="size-16 rounded-xl bg-slate-100 overflow-hidden shrink-0">
+                                    <img alt="Doctor" class="w-full h-full object-cover"
+                                        data-alt="Female doctor in professional white coat"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQdBX6ZW7xKuu260HsPTD7aY8dK0AmcYaqF4U0-TxMZLSzDBWRZOQWyS1TZ2pTr4rjEvR69bYDMoYAMOcUFMzFziBvCMIKAPBbPSAxgdVA8NVUFVbgYokUHf8FZ-870AnYYhs1qSAhAcJN_f2_-AqwiSpdLFYp5c1lrY8aMUn19bFW3T_FJ6UguO-bnDvV-29eEckK0jOTxrpggUAL6WsoWwo69hMhHA6mTj3lUlTnY6lWbB2pagbF4TSwZ5dekhEal159xGCPyQY" />
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h3
+                                                class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight">
+                                                Dr. Sarah Jenkins</h3>
+                                            <p class="text-sm text-slate-500 font-medium">Cardiology Specialist</p>
+                                        </div>
+                                        <span
+                                            class="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 rounded-full">In-Person</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 mt-4">
+                                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                                            <span class="material-symbols-outlined text-slate-400">calendar_today</span>
+                                            <span>Tuesday, Oct 24, 2023</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                                            <span class="material-symbols-outlined text-slate-400">schedule</span>
+                                            <span>10:30 AM - 11:15 AM</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm col-span-full">
+                                            <span class="material-symbols-outlined text-slate-400">location_on</span>
+                                            <span>Central Medical Plaza, Suite 402</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                                <button
+                                    class="px-4 py-2 text-slate-600 dark:text-slate-400 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Reschedule</button>
+                                <button
+                                    class="px-5 py-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-sm font-bold rounded-lg hover:opacity-90 transition-opacity">Directions</button>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark border-2 border-primary/30 rounded-xl p-5 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 right-0">
+                                <div
+                                    class="bg-primary text-slate-900 px-4 py-1 rounded-bl-xl font-bold text-[10px] uppercase tracking-wider">
+                                    Starting in 45 mins</div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="size-16 rounded-xl bg-slate-100 overflow-hidden shrink-0">
+                                    <img alt="Doctor" class="w-full h-full object-cover"
+                                        data-alt="Male doctor with stethoscope smiling"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWs7CJ6gDRaSums1EIjEDgAvon6SyWZrdI54tYl-KVWR6vZDaYt2whQM8LyLcwaK-eAzynpEitOCFjK_5S-H9dGIbzZoyW4x3dJOiQgyZZH_ZLGYKa7VzYK7uBx5RquS6raAlGK7eMfrSwkEfbgLlrrxwu_rELhDb7sP8yySHlXEXItsUYUx4aqaTNYYVD9gkb6dawMXQ9m4F2uxYh-LPZwYIWfzLqGc409sSXdYVrt04kB9KahEI-kCEsBD1H6sBsvTl8xsvB0XU" />
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h3
+                                                class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight">
+                                                Dr. Michael Chen</h3>
+                                            <p class="text-sm text-slate-500 font-medium">General Practitioner</p>
+                                        </div>
+                                        <span
+                                            class="bg-primary/20 text-slate-900 dark:text-primary text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 rounded-full">Tele-health</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 mt-4">
+                                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                                            <span class="material-symbols-outlined text-primary">calendar_today</span>
+                                            <span class="font-bold text-slate-900 dark:text-slate-100">Today, Oct
+                                                19</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                                            <span class="material-symbols-outlined text-primary">schedule</span>
+                                            <span class="font-bold text-slate-900 dark:text-slate-100">2:00 PM - 2:30
+                                                PM</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-2 text-primary text-sm col-span-full font-medium">
+                                            <span class="material-symbols-outlined">videocam</span>
+                                            <span>Join via Secure Video Link</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                                <button
+                                    class="px-4 py-2 text-slate-600 dark:text-slate-400 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Prepare</button>
+                                <button
+                                    class="px-5 py-2 bg-primary text-slate-900 text-sm font-bold rounded-lg hover:brightness-95 transition-all flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-lg">video_call</span>
+                                    Join Video Room
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl p-5 hover:shadow-md transition-shadow opacity-75">
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="size-16 rounded-xl bg-slate-100 overflow-hidden shrink-0">
+                                    <img alt="Doctor" class="w-full h-full object-cover"
+                                        data-alt="Female doctor smiling in office"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7dlRZvxL3aOo2oKojco9jZbdx1jdZn54LDVUAKgp8rry9fMStuI_DEh45dKgdRcQujdfrWxTolmdUV422ZR0bbXjopI8Ba8ANi0rzIpoFbJuBJ4i3XdOZ5nevGe6_Yv3jd5poVgrVkyq4RTQWllegAbWp3FIQzwtG1FUo0WFOfjysIYV-YxRbC_UZQ7DsSCoG5XCvJJEyaXa-rmdlDXhig-RcwJBEYv_q7N9KPWRJCvu2JQMbdkInuI0_vA4d02sii9-cOlDGhP8" />
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h3
+                                                class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight">
+                                                Dr. Emily Rodriguez</h3>
+                                            <p class="text-sm text-slate-500 font-medium">Dermatologist</p>
+                                        </div>
+                                        <span
+                                            class="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 rounded-full">In-Person</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 mt-4">
+                                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                                            <span class="material-symbols-outlined text-slate-400">calendar_today</span>
+                                            <span>Friday, Nov 03, 2023</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
+                                            <span class="material-symbols-outlined text-slate-400">schedule</span>
+                                            <span>09:00 AM - 09:30 AM</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm col-span-full">
+                                            <span class="material-symbols-outlined text-slate-400">location_on</span>
+                                            <span>Westside Specialty Clinic</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                                <button
+                                    class="px-4 py-2 text-slate-600 dark:text-slate-400 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancel</button>
+                                <button
+                                    class="px-5 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-80 flex flex-col gap-6">
+                    <div
+                        class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+                                October 2023</h3>
+                            <div class="flex gap-1">
+                                <button
+                                    class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-500"><span
+                                        class="material-symbols-outlined text-sm">chevron_left</span></button>
+                                <button
+                                    class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-500"><span
+                                        class="material-symbols-outlined text-sm">chevron_right</span></button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-y-2 text-center text-[11px] font-bold text-slate-400 mb-2">
+                            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1">
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">24</div>
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">25</div>
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">26</div>
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">27</div>
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">28</div>
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">29</div>
+                            <div class="h-8 flex items-center justify-center text-xs text-slate-300">30</div>
+                            <div class="h-8 flex items-center justify-center text-xs">1</div>
+                            <div class="h-8 flex items-center justify-center text-xs">2</div>
+                            <div class="h-8 flex items-center justify-center text-xs">3</div>
+                            <div class="h-8 flex items-center justify-center text-xs">4</div>
+                            <div class="h-8 flex items-center justify-center text-xs">5</div>
+                            <div class="h-8 flex items-center justify-center text-xs">6</div>
+                            <div class="h-8 flex items-center justify-center text-xs">7</div>
+                            <div class="h-8 flex items-center justify-center text-xs">8</div>
+                            <div class="h-8 flex items-center justify-center text-xs">9</div>
+                            <div class="h-8 flex items-center justify-center text-xs">10</div>
+                            <div class="h-8 flex items-center justify-center text-xs">11</div>
+                            <div class="h-8 flex items-center justify-center text-xs">12</div>
+                            <div class="h-8 flex items-center justify-center text-xs">13</div>
+                            <div class="h-8 flex items-center justify-center text-xs">14</div>
+                            <div class="h-8 flex items-center justify-center text-xs">15</div>
+                            <div class="h-8 flex items-center justify-center text-xs">16</div>
+                            <div class="h-8 flex items-center justify-center text-xs">17</div>
+                            <div class="h-8 flex items-center justify-center text-xs">18</div>
+                            <div
+                                class="h-8 flex items-center justify-center text-xs bg-primary text-slate-900 rounded-full font-bold">
+                                19</div>
+                            <div class="h-8 flex items-center justify-center text-xs">20</div>
+                            <div class="h-8 flex items-center justify-center text-xs">21</div>
+                            <div class="h-8 flex items-center justify-center text-xs">22</div>
+                            <div class="h-8 flex items-center justify-center text-xs">23</div>
+                            <div
+                                class="h-8 flex items-center justify-center text-xs border border-primary text-primary rounded-full font-bold">
+                                24</div>
+                            <div class="h-8 flex items-center justify-center text-xs">25</div>
+                            <div class="h-8 flex items-center justify-center text-xs">26</div>
+                            <div class="h-8 flex items-center justify-center text-xs">27</div>
+                            <div class="h-8 flex items-center justify-center text-xs">28</div>
+                            <div class="h-8 flex items-center justify-center text-xs">29</div>
+                            <div class="h-8 flex items-center justify-center text-xs">30</div>
+                            <div
+                                class="h-8 flex items-center justify-center text-xs border border-primary text-primary rounded-full font-bold">
+                                3</div>
+                        </div>
+                    </div>
+                    <div class="bg-primary/10 border border-primary/20 rounded-xl p-5">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-primary">lightbulb</span>
+                            <h4 class="text-sm font-bold text-slate-900 dark:text-slate-100">Quick Tip</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            For tele-health appointments, we recommend joining the waiting room 5 minutes early to test
+                            your audio and video.
+                        </p>
+                        <a class="text-xs font-bold text-primary underline" href="#">Troubleshooting Guide</a>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl p-5">
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">
+                            Insurance Status</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs text-slate-500">Plan</span>
+                            <span class="text-xs font-bold text-slate-900 dark:text-white">Premium Health+</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-slate-500">Coverage</span>
+                            <span class="text-xs font-bold text-green-500 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">check_circle</span> Active
+                            </span>
+                        </div>
+                        <button
+                            class="w-full py-2 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700">Manage
+                            Policy</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

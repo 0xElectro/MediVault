@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediVault - Professional Medical Records</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "primary-dark": "#0ea5a5",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "text-main": "#0f172a",
+                        "text-muted": "#475569",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "md": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-text-main antialiased selection:bg-primary selection:text-text-main">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-2">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/20 text-primary-dark">
+<span class="material-symbols-outlined text-2xl">medical_services</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900">MediVault</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-600 hover:text-primary-dark transition-colors" href="#features">Features</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary-dark transition-colors" href="#how-it-works">How it Works</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary-dark transition-colors" href="#security">Security</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-sm font-semibold text-slate-600 hover:text-slate-900">Log in</button>
+<button class="hidden sm:flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition-all hover:bg-primary-dark/20 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        Get Started
+                    </button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-white py-20 sm:py-32">
+<div class="absolute inset-0 bg-[radial-gradient(#13ecec_1px,transparent_1px)] [background-size:16px_16px] opacity-[0.1] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+<div class="flex flex-col justify-center text-left">
+<div class="mb-6 inline-flex w-fit items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary-dark">
+<span class="material-symbols-outlined mr-1 text-sm">verified_user</span>
+                                HIPAA Compliant &amp; Secure
+                            </div>
+<h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl xl:text-6xl mb-6">
+                                Life-Saving Data at the <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-dark to-primary">Speed of a Scan</span>
+</h1>
+<p class="mb-8 text-lg leading-8 text-slate-600">
+                                MediVault bridges the gap between patient history and emergency response. Secure, AI-summarized medical records accessible instantly via QR code when every second counts.
+                            </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-slate-900 shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined mr-2">person_add</span>
+                                    Join as Patient
+                                </button>
+<button class="flex items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-3.5 text-base font-bold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2">
+<span class="material-symbols-outlined mr-2">stethoscope</span>
+                                    Join as Provider
+                                </button>
+</div>
+<div class="mt-10 flex items-center gap-x-6">
+<div class="flex -space-x-2 overflow-hidden">
+<div class="inline-block h-8 w-8 rounded-full bg-slate-200 ring-2 ring-white" data-alt="User avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUgv8xLSB863Q2mzN2RUGPbC97MdgNsrIoFP6QzRXXIDrmdROAb6mNB4B6bNguCty6BPOHNaBF2citha4mTbHs2WIroSKJWaTayrEs8LEuTd1U0YmHZ4V7yeZB4Hs8J0gB1cNdZEQA7FHp3mewHzbLXkHi_CpIqfpoYUZ1GgK_bUsOeiKmU2AqIwqAxEZTzMmT52Z2Yk6SJHStdzJTS5mgYeNYDRm--A6a-dNE-PumPmYEfX4XYfY0WPpPpiNXXCBtbVF0ZygJTL0'); background-size: cover;"></div>
+<div class="inline-block h-8 w-8 rounded-full bg-slate-200 ring-2 ring-white" data-alt="User avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkwjYeJfC2bP5zrn8tI7Y6bxlsxVQl3abF991ufwCckLL2Oi8ioS6FqhkkyYyNjmb6DHT0iM7YMc_6lZcT0f4antEM5Jc4Gqh2xFWccZfimtJWiKgxseujiJdCPuQQRe8wEcSp3zR-eamwYc_EWheC5gp6Dxs5anStYJhFOcNI0k5mBMYEnq_qDnd8gEBsFCYiBnYH1hX5diSUTFL-Y_md63MfjkHPxveUqOXEwDLT7vd1zNBrWFRT6WXt1WjWOzLzwspJkjk6l-k'); background-size: cover;"></div>
+<div class="inline-block h-8 w-8 rounded-full bg-slate-200 ring-2 ring-white" data-alt="User avatar 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCj-lSFkW6AARKPUFJIu68LiXPSHg_4VJuLDe4xmT4wDPjc3uG7Z4ySwkLqmrpIYWJpoLsAWWWOKTy8xDq_Ys4e3xn8YAQqg97PyqWgRZOtXsLKhGln9_B_0Ss2G_00yx508N9U0ISwZA8tZPspoTWLTTeqds23TjtxcKlQTvgjzDoXCqFexq5yQN8_dE-l-NpvMVmqemY-1ZYjkTfzMeTLTJS6AvylPVV555-EdJV9dcGvqo9AkfMe9XXEjOpPcHV_95ifQ8qLz1U'); background-size: cover;"></div>
+<div class="inline-block h-8 w-8 rounded-full bg-slate-200 ring-2 ring-white" data-alt="User avatar 4" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDv9fb5ePoRnZUV97cKrBj0V2CG0-CNneNm40iTPbEa9tzYz7k2GgSLWDjkNjZMFefpUb0tu7cGZtuM2klqp1QWjY8rfZ1Yz-bjdqQalo7s16reysRQISdxrXQjT3sz69kUl0kyHYP-GOz4L0OGqn8dOOQktQiLb3Vbiof8QOc29VRYXz3RXnCKkjeQA0ObSte476Zoavk5IR4JleCAAPNEJ84Khaljlk5P5w7BLS8fZTvgOK-ffvZhpuem0qNRCksguV4TNQir7Ck'); background-size: cover;"></div>
+</div>
+<span class="text-sm font-medium text-slate-500">Trusted by 10,000+ patients</span>
+</div>
+</div>
+<div class="relative lg:h-full lg:min-h-[500px]">
+<div class="relative h-full w-full overflow-hidden rounded-2xl bg-slate-100 shadow-2xl ring-1 ring-slate-900/10" data-alt="Doctor holding tablet with medical interface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIDdpXf7n0icFLxHW9_med2izRhz_KkNkQvhN8wGpfsgm-ftLuC8f0Eddzo3Jha2iyV1aDPxyzQ4CGgMnBNSiUKJUq9cpxNwu6XAIuvqm0F3qoBsD0r3euyYcfFggQ2iMSziiTQp2G32M944NuS6TSkJ0FNGsaTitffMDpcdSwJZipzYp5w-kHZn6CHhXXYMzeTiBXaI-dti5mjknXZ4EE4Q1CuzTUp5X82TseYjqrHG6Re2CbQGATJsMxrH7pBKz8l2R6AoJJFHw'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<div class="rounded-xl bg-white/95 backdrop-blur p-4 shadow-lg ring-1 ring-black/5">
+<div class="flex items-center gap-4">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary-dark">
+<span class="material-symbols-outlined text-3xl">qr_code_scanner</span>
+</div>
+<div>
+<p class="font-bold text-slate-900">Emergency Access Active</p>
+<p class="text-sm text-slate-500">Dr. Smith scanned patient ID: #8821</p>
+</div>
+<div class="ml-auto text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded">
+                                                Live
+                                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Grid -->
+<section class="py-24 bg-slate-50" id="features">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-2xl text-center mb-16">
+<h2 class="text-base font-semibold leading-7 text-primary-dark">Advanced Capabilities</h2>
+<p class="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Everything you need for secure health data</p>
+<p class="mt-6 text-lg leading-8 text-slate-600">Designed for security, speed, and accuracy in critical moments. We ensure your data works for you when you can't speak for yourself.</p>
+</div>
+<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+<!-- Feature 1 -->
+<div class="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md hover:border-primary/50 group">
+<div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900">Secure Storage</h3>
+<p class="mt-2 text-slate-500 text-sm leading-relaxed">
+                                Bank-grade AES-256 encryption protects your health data at rest and in transit. Only authorized personnel can decrypt sensitive records.
+                            </p>
+</div>
+<!-- Feature 2 -->
+<div class="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md hover:border-primary/50 group">
+<div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-purple-50 text-purple-600 group-hover:bg-purple-100 transition-colors">
+<span class="material-symbols-outlined">psychology</span> <!-- "Brain" equivalent -->
+</div>
+<h3 class="text-lg font-bold text-slate-900">AI Clinical Summary</h3>
+<p class="mt-2 text-slate-500 text-sm leading-relaxed">
+                                Advanced AI parses complex history into a concise 1-page summary, highlighting allergies, medications, and chronic conditions for ER doctors.
+                            </p>
+</div>
+<!-- Feature 3 -->
+<div class="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md hover:border-primary/50 group">
+<div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-teal-50 text-teal-600 group-hover:bg-teal-100 transition-colors">
+<span class="material-symbols-outlined">qr_code_2</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900">Emergency QR Access</h3>
+<p class="mt-2 text-slate-500 text-sm leading-relaxed">
+                                EMTs and ER staff scan your unique QR code to instantly access vital records, bypassing administrative delays during trauma care.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- How it Works -->
+<section class="py-24 bg-white overflow-hidden" id="how-it-works">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="mb-16 md:text-center">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">How MediVault Works</h2>
+<p class="mt-4 text-lg text-slate-600">A simple four-step process to secure your medical future.</p>
+</div>
+<div class="relative">
+<!-- Connecting Line for Desktop -->
+<div class="absolute left-0 top-1/2 hidden h-0.5 w-full -translate-y-1/2 bg-slate-100 lg:block z-0"></div>
+<div class="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8 relative z-10">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center group">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-white border-4 border-slate-50 shadow-sm ring-1 ring-slate-200 mb-6 group-hover:border-primary/20 group-hover:ring-primary transition-all">
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary-dark">upload_file</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900">1. Upload Data</h3>
+<p class="mt-2 text-sm text-slate-500">Securely upload your existing medical history and PDF reports.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center group">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-white border-4 border-slate-50 shadow-sm ring-1 ring-slate-200 mb-6 group-hover:border-primary/20 group-hover:ring-primary transition-all">
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary-dark">auto_awesome</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900">2. AI Processing</h3>
+<p class="mt-2 text-sm text-slate-500">Our medical AI extracts and summarizes key clinical details.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center group">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-white border-4 border-slate-50 shadow-sm ring-1 ring-slate-200 mb-6 group-hover:border-primary/20 group-hover:ring-primary transition-all">
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary-dark">qr_code</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900">3. Get Your Code</h3>
+<p class="mt-2 text-sm text-slate-500">Receive a unique digital and printable QR code card.</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center group">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-white border-4 border-slate-50 shadow-sm ring-1 ring-slate-200 mb-6 group-hover:border-primary/20 group-hover:ring-primary transition-all">
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary-dark">emergency_share</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900">4. Emergency Access</h3>
+<p class="mt-2 text-sm text-slate-500">First responders scan to view your summary instantly.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust & Security Band -->
+<section class="bg-slate-900 py-16" id="security">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 gap-y-10 lg:grid-cols-2 lg:gap-x-12 items-center">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Uncompromising Security</h2>
+<p class="mt-4 text-lg text-slate-300">Your privacy is our obsession. We adhere to the strictest medical data standards globally.</p>
+<ul class="mt-8 space-y-4">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-3 mt-1">check_circle</span>
+<span class="text-slate-300">HIPAA &amp; GDPR Compliant Infrastructure</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-3 mt-1">check_circle</span>
+<span class="text-slate-300">SOC2 Type II Certified Data Centers</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-3 mt-1">check_circle</span>
+<span class="text-slate-300">End-to-End Encryption (AES-256)</span>
+</li>
+</ul>
+<div class="mt-10">
+<button class="text-primary font-semibold hover:text-white transition-colors flex items-center">
+                                    Read our Security Whitepaper <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-800 rounded-2xl p-8 border border-slate-700">
+<div class="grid grid-cols-2 gap-6">
+<div class="flex flex-col items-center justify-center p-6 bg-slate-900/50 rounded-xl border border-slate-700">
+<span class="material-symbols-outlined text-4xl text-slate-400 mb-2">lock</span>
+<span class="text-sm font-semibold text-slate-300">SSL Secure</span>
+</div>
+<div class="flex flex-col items-center justify-center p-6 bg-slate-900/50 rounded-xl border border-slate-700">
+<span class="material-symbols-outlined text-4xl text-slate-400 mb-2">verified_user</span>
+<span class="text-sm font-semibold text-slate-300">HIPAA Ready</span>
+</div>
+<div class="flex flex-col items-center justify-center p-6 bg-slate-900/50 rounded-xl border border-slate-700">
+<span class="material-symbols-outlined text-4xl text-slate-400 mb-2">cloud_done</span>
+<span class="text-sm font-semibold text-slate-300">Encrypted Cloud</span>
+</div>
+<div class="flex flex-col items-center justify-center p-6 bg-slate-900/50 rounded-xl border border-slate-700">
+<span class="material-symbols-outlined text-4xl text-slate-400 mb-2">fingerprint</span>
+<span class="text-sm font-semibold text-slate-300">Biometric Access</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 bg-primary/10">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Ready to secure your medical history?</h2>
+<p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">Join thousands of patients and providers who trust MediVault for critical care information.</p>
+<div class="mt-10 flex items-center justify-center gap-x-6">
+<a class="rounded-lg bg-primary px-6 py-3.5 text-sm font-bold text-slate-900 shadow-sm hover:bg-primary-dark/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">Create Patient Account</a>
+<a class="text-sm font-semibold leading-6 text-slate-900 flex items-center" href="#">Contact Sales <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span></a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-slate-200">
+<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-4">
+<div class="flex h-6 w-6 items-center justify-center rounded bg-primary/20 text-primary-dark">
+<span class="material-symbols-outlined text-lg">medical_services</span>
+</div>
+<span class="text-lg font-bold text-slate-900">MediVault</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed">
+                            Empowering patients and providers with secure, instant access to life-saving medical data.
+                        </p>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-900 mb-4">Product</h3>
+<ul class="space-y-3">
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Features</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Security</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Pricing</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">For Providers</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-900 mb-4">Company</h3>
+<ul class="space-y-3">
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">About Us</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Careers</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Blog</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-slate-900 mb-4">Legal</h3>
+<ul class="space-y-3">
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Privacy Policy</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Terms of Service</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">Cookie Policy</a></li>
+<li><a class="text-sm text-slate-600 hover:text-primary-dark" href="#">HIPAA</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-12 border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-400">© 2024 MediVault Inc. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-slate-600" href="#"><span class="sr-only">Twitter</span><svg class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg></a>
+<a class="text-slate-400 hover:text-slate-600" href="#"><span class="sr-only">GitHub</span><svg class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path></svg></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

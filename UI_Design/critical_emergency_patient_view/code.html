@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediVault - Critical Emergency Patient View</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1a242f",
+                        "surface-light": "#ffffff",
+                        "danger": "#ef4444",
+                        "warning": "#f59e0b",
+                        "success": "#10b981",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["Inter", "monospace"], // Using Inter for mono-like feel if needed or system mono
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "sm": "0.125rem", "lg": "0.375rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283541; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374756; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased min-h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 py-3 bg-surface-light dark:bg-surface-dark z-20 shrink-0">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">local_hospital</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">MediVault</h2>
+</div>
+<div class="flex flex-1 items-center justify-end gap-6">
+<!-- Search Bar -->
+<label class="hidden md:flex flex-col min-w-40 h-10 w-96">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#101922] overflow-hidden group focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all">
+<div class="text-slate-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none bg-transparent border-none focus:ring-0 text-sm h-full px-3 text-slate-900 dark:text-white placeholder:text-slate-400" placeholder="Search patient ID, name, or symptoms..." value=""/>
+</div>
+</label>
+<!-- Emergency Status -->
+<div class="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined text-[20px] animate-pulse">emergency</span>
+<span class="text-xs font-bold uppercase tracking-wide">Emergency Mode Active</span>
+</div>
+<!-- Profile -->
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-700">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Dr. Sarah Jenkins</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Chief Resident</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="Portrait of a female doctor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDG3VKPbT4NaIzgJO82Qr1zY2_OTSvvWosgonfIeHej937VMgKLT0W95b8wdbilTzxQCYGirzmC9bQSvbD6yIHq73D4qxbpHh6ipOEkhUpjP56-QR1FwFvru9OiyU_SGxI_liedU_SEBoBz8n5gFTP81p-xtZQA9i0Dn61sBY4py8sDg8wRdEAd4glchCvGPLquITaBIdhznv5qWl8rkibONqq9em3gXMdLIFD-vQDRjVNwhGLkEgKWkqH8eIF30PpjsOlOLZoYm88");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 overflow-hidden">
+<!-- Left Panel: Patient Data (Scrollable) -->
+<div class="flex-1 flex flex-col h-full overflow-y-auto custom-scrollbar p-6 gap-6">
+<!-- Patient Identity Header -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-5">
+<div class="flex flex-col md:flex-row gap-6 items-start">
+<!-- Photo -->
+<div class="shrink-0 relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg w-24 h-24 sm:w-32 sm:h-32 shadow-inner bg-slate-200 dark:bg-slate-800" data-alt="Portrait of middle aged male patient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxEHNj1xOIF1ct77uo46raYV2aI44WV2oVZ_CDRAI8NZBIW8qRzzIu2fS3gH_3g9RQyrGGH58F0Hqo71pXu2Iwq0ponHSwuiPS4V9JzZ2OmbNfrN27t_1-G4FfWzr7aBsaVIrjeiJlB5YDH1woe-91fov99EgTAWaBaqhiJmKKqhFooEKFjBrbd7Oob_Gj-Ez_4qVh_WJC1xByf8KbKNf0hbgPRsneHQck3sKCtKMWWWtirZrE6aDtNp_jgTKKT7hjOV8KaNJtrcA");'></div>
+<div class="absolute -bottom-2 -right-2 bg-slate-900 text-white text-xs px-2 py-0.5 rounded border border-slate-700 shadow-md font-mono">ID: #9283</div>
+</div>
+<!-- Info -->
+<div class="flex-1 w-full">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-2">
+<div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">John Doe</h1>
+<div class="flex items-center gap-3 mt-1 text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">calendar_today</span> 45y</span>
+<span class="w-1 h-1 rounded-full bg-slate-600"></span>
+<span>Male</span>
+<span class="w-1 h-1 rounded-full bg-slate-600"></span>
+<span>Admitted: 2h ago</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-[#15202b] border border-slate-200 dark:border-slate-700 text-center">
+<span class="block text-xs uppercase text-slate-500 dark:text-slate-400 font-bold mb-1">Blood Group</span>
+<span class="text-2xl font-black text-slate-900 dark:text-white">O+</span>
+</div>
+</div>
+</div>
+<!-- Allergies & Badges -->
+<div class="flex flex-wrap gap-2 mt-4">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-danger text-white shadow-sm shadow-red-900/20">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="text-sm font-bold tracking-wide">ALLERGY: PENICILLIN</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-danger text-white shadow-sm shadow-red-900/20">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="text-sm font-bold tracking-wide">ALLERGY: LATEX</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="text-sm font-medium">Insurance Verified</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Vitals Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Current Medications -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">medication</span>
+                            Current Medications
+                        </h3>
+<button class="text-xs font-semibold text-primary hover:text-blue-400">View History</button>
+</div>
+<div class="p-0 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50 dark:bg-[#15202b] text-xs uppercase text-slate-500 dark:text-slate-400 font-semibold">
+<tr>
+<th class="px-5 py-3 rounded-tl-lg">Medication</th>
+<th class="px-5 py-3">Dosage</th>
+<th class="px-5 py-3 text-right rounded-tr-lg">Last Admin</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-5 py-3 font-medium text-slate-900 dark:text-slate-200">Epinephrine (IV)</td>
+<td class="px-5 py-3 text-slate-500 dark:text-slate-400 font-mono">1mg</td>
+<td class="px-5 py-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                                            10 mins ago
+                                        </span>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-5 py-3 font-medium text-slate-900 dark:text-slate-200">Atorvastatin</td>
+<td class="px-5 py-3 text-slate-500 dark:text-slate-400 font-mono">20mg</td>
+<td class="px-5 py-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                                            Daily
+                                        </span>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-5 py-3 font-medium text-slate-900 dark:text-slate-200">Lisinopril</td>
+<td class="px-5 py-3 text-slate-500 dark:text-slate-400 font-mono">10mg</td>
+<td class="px-5 py-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                                            Daily
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Recent Lab Results -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">biotech</span>
+                            Last 3 Lab Results
+                        </h3>
+<button class="text-xs font-semibold text-primary hover:text-blue-400">All Labs</button>
+</div>
+<div class="flex flex-col divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Result 1 -->
+<div class="px-5 py-3 flex items-center justify-between group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-200">Hemoglobin</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">CBC Panel • 1h ago</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-lg font-mono font-bold text-danger">11.2 <span class="text-xs font-sans font-normal text-slate-500">g/dL</span></span>
+<div class="flex items-center gap-1 text-danger bg-danger/10 px-2 py-1 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+                                    LOW
+                                </div>
+</div>
+</div>
+<!-- Result 2 -->
+<div class="px-5 py-3 flex items-center justify-between group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-200">WBC</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">CBC Panel • 1h ago</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-lg font-mono font-bold text-danger">14.5 <span class="text-xs font-sans font-normal text-slate-500">K/uL</span></span>
+<div class="flex items-center gap-1 text-danger bg-danger/10 px-2 py-1 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                                    HIGH
+                                </div>
+</div>
+</div>
+<!-- Result 3 -->
+<div class="px-5 py-3 flex items-center justify-between group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-slate-200">Creatinine</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">BMP Panel • 1h ago</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-lg font-mono font-bold text-success">1.1 <span class="text-xs font-sans font-normal text-slate-500">mg/dL</span></span>
+<div class="flex items-center gap-1 text-success bg-success/10 px-2 py-1 rounded text-xs font-bold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                    NORMAL
+                                </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Actions Mobile Only (Visible on small screens, hidden on large) -->
+<div class="block lg:hidden mt-auto pt-6 pb-20">
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 rounded-lg bg-danger text-white px-4 py-3 text-sm font-bold shadow-lg shadow-red-900/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">flag</span>
+                        Flag Critical
+                    </button>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary text-white px-4 py-3 text-sm font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">lock_open</span>
+                        Full Access
+                    </button>
+</div>
+</div>
+</div>
+<!-- Right Panel: AI Insight (Fixed Sidebar on Desktop) -->
+<aside class="hidden lg:flex w-[380px] flex-col border-l border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#15202b] shadow-xl shrink-0 z-10">
+<!-- AI Header -->
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-gradient-to-b from-primary/5 to-transparent">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-2xl animate-pulse">auto_awesome</span>
+<h2 class="text-lg font-bold uppercase tracking-wide">AI Clinical Summary</h2>
+</div>
+<div class="text-[10px] font-bold px-2 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400">BETA</div>
+</div>
+<!-- Confidence Gauge -->
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Confidence Level</span>
+<span class="text-sm font-bold text-primary">94%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 mt-1.5 overflow-hidden">
+<div class="bg-primary h-2 rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<!-- AI Content -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+<div class="space-y-3">
+<h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">subject</span>
+                        Assessment
+                    </h4>
+<p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                        Patient presents with acute signs consistent with <strong class="text-slate-900 dark:text-white">anaphylaxis</strong>. Notable respiratory distress and hypotension.
+                    </p>
+<ul class="space-y-2 mt-2">
+<li class="flex gap-2 text-sm text-slate-700 dark:text-slate-300 leading-snug bg-white dark:bg-[#1a242f] p-3 rounded border border-slate-200 dark:border-slate-700/50">
+<span class="material-symbols-outlined text-[18px] text-warning shrink-0 mt-0.5">history</span>
+<span>History of severe reaction to bee stings noted in EMR (2019).</span>
+</li>
+<li class="flex gap-2 text-sm text-slate-700 dark:text-slate-300 leading-snug bg-white dark:bg-[#1a242f] p-3 rounded border border-slate-200 dark:border-slate-700/50">
+<span class="material-symbols-outlined text-[18px] text-danger shrink-0 mt-0.5">vital_signs</span>
+<span>Immediate airway assessment recommended due to dropping SpO2 (92%).</span>
+</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">lightbulb</span>
+                        Suggested Actions
+                    </h4>
+<ul class="space-y-2">
+<li class="flex items-start gap-3">
+<div class="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0"></div>
+<span class="text-sm text-slate-600 dark:text-slate-300">Prepare second dose of Epinephrine if no improvement in 5 mins.</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0"></div>
+<span class="text-sm text-slate-600 dark:text-slate-300">Order ABG to assess respiratory acidosis.</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0"></div>
+<span class="text-sm text-slate-600 dark:text-slate-300">Monitor ECG for ischemic changes.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- AI Disclaimer Footer -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-[#111820]">
+<div class="flex gap-2 text-xs text-slate-500 dark:text-slate-500 leading-snug">
+<span class="material-symbols-outlined text-[16px] shrink-0">info</span>
+<p>AI-generated insights are for clinical decision support only. Always verify with standard protocols.</p>
+</div>
+</div>
+</aside>
+</main>
+<!-- Global Action Footer (Desktop Sticky) -->
+<footer class="hidden lg:flex shrink-0 items-center justify-between px-6 py-4 bg-surface-light dark:bg-surface-dark border-t border-slate-200 dark:border-slate-800 z-30">
+<div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">update</span> Last updated: 2m ago</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="group flex items-center justify-center gap-2 rounded-lg bg-transparent border border-danger text-danger hover:bg-danger hover:text-white px-6 py-2.5 text-sm font-bold transition-all">
+<span class="material-symbols-outlined">flag</span>
+                Flag as Critical
+            </button>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary text-white hover:bg-blue-600 px-6 py-2.5 text-sm font-bold shadow-lg shadow-blue-500/20 transition-all">
+<span class="material-symbols-outlined">lock_open</span>
+                Request Full Access
+            </button>
+</div>
+</footer>
+</body></html>
