@@ -1,0 +1,474 @@
+import React from 'react';
+
+const DoctorFullPatientRecordView = () => {
+    return (
+        <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans min-h-screen flex overflow-hidden">
+            {/* Sidebar Navigation */}
+            <aside className="w-20 lg:w-64 flex-shrink-0 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between h-screen transition-all duration-300 z-50">
+                {/* Top Section */}
+                <div className="flex flex-col">
+                    {/* Logo Area */}
+                    <div className="h-16 flex items-center justify-center lg:justify-start lg:px-6 border-b border-slate-100 dark:border-slate-700">
+                        <div className="h-8 w-8 rounded bg-primary flex items-center justify-center text-white font-bold text-xl mr-0 lg:mr-3">
+                            M
+                        </div>
+                        <span className="hidden lg:block text-lg font-bold tracking-tight text-slate-800 dark:text-white">MediVault</span>
+                    </div>
+
+                    {/* Profile Snippet (Mobile/Collapsed view handled by icon only) */}
+                    <div className="p-4 border-b border-slate-100 dark:border-slate-700 flex items-center gap-3">
+                        <div className="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 shrink-0 border-2 border-slate-100 dark:border-slate-600" title="Portrait of Dr. Smith" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBBiNzDrC68bpryZMPezN7VgKFzrBSYX4Isv0bGnMes4-XqkaX4njj_4zFS_Ld3uuM3K98EtiJGy3aRiDoX6Znj-HrKMUyYM-pA-QQ_687IFeoer3MoR0tfP01NqTVxKzzfb1srPYUHcdKAfq78lPmPR9WrXKU1kMscQROhVTvwbOCkj5rgKJrtdz2By1rDno7ucmw1YRgUHzvS_tSKLY2pXCfHlYHHJxig9hq6ePH5wo5_Z698bbOu4pM0xBGQ_twaSUD5Xjrkrm4")' }}></div>
+                        <div className="hidden lg:flex flex-col overflow-hidden">
+                            <h1 className="text-slate-900 dark:text-white text-sm font-semibold truncate">Dr. Smith</h1>
+                            <p className="text-slate-500 dark:text-slate-400 text-xs truncate">Cardiologist</p>
+                        </div>
+                    </div>
+
+                    {/* Navigation Links */}
+                    <nav className="flex flex-col gap-1 p-3">
+                        <a className="flex items-center gap-3 px-3 py-2.5 rounded text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+                            <span className="material-symbols-outlined text-2xl">dashboard</span>
+                            <span className="hidden lg:block text-sm font-medium">Dashboard</span>
+                        </a>
+                        <a className="flex items-center gap-3 px-3 py-2.5 rounded bg-primary/10 text-primary-dark dark:text-primary font-medium transition-colors" href="#">
+                            <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>group</span>
+                            <span className="hidden lg:block text-sm">Patients</span>
+                        </a>
+                        <a className="flex items-center gap-3 px-3 py-2.5 rounded text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+                            <span className="material-symbols-outlined text-2xl">calendar_today</span>
+                            <span className="hidden lg:block text-sm font-medium">Schedule</span>
+                        </a>
+                        <a className="flex items-center gap-3 px-3 py-2.5 rounded text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+                            <span className="material-symbols-outlined text-2xl">chat_bubble_outline</span>
+                            <span className="hidden lg:block text-sm font-medium">Messages</span>
+                            <span className="hidden lg:flex ml-auto bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+                        </a>
+                        <a className="flex items-center gap-3 px-3 py-2.5 rounded text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+                            <span className="material-symbols-outlined text-2xl">biotech</span>
+                            <span className="hidden lg:block text-sm font-medium">Lab Results</span>
+                        </a>
+                    </nav>
+                </div>
+
+                {/* Bottom Section */}
+                <div className="p-3">
+                    <a className="flex items-center gap-3 px-3 py-2.5 rounded text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+                        <span className="material-symbols-outlined text-2xl">settings</span>
+                        <span className="hidden lg:block text-sm font-medium">Settings</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-3 py-2.5 rounded text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mt-1" href="#">
+                        <span className="material-symbols-outlined text-2xl">logout</span>
+                        <span className="hidden lg:block text-sm font-medium">Logout</span>
+                    </a>
+                </div>
+            </aside>
+
+            {/* Main Content Area */}
+            <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
+                {/* Sticky Patient Header */}
+                <header className="bg-white dark:bg-slate-850 border-b border-slate-200 dark:border-slate-800 flex flex-col z-40 shadow-sm shrink-0">
+                    {/* Top Row: Patient ID & Actions */}
+                    <div className="px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div className="flex items-start gap-4">
+                            <div className="h-14 w-14 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden shrink-0">
+                                <img alt="Jane Doe Patient Portrait" className="w-full h-full object-cover" title="Portrait of patient Jane Doe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnq3yF-NkpMyk9eysDWc6C1S5rU5UnaxKB9BhEK8fsjutiC5pUj4W7KImpCczWqntxrrKo0-V_bz0S02GY9FufouvlC-KTR-wZWt5APrvDS1NFxBxV7c_bbO0JMJmKN3ZEyT2WhlQ2tLrXz3f1hd-VR4V7ZbeSb7hruvrh8DmDzFKiYqsVC1sdfaWBiVLW0u15Juwn_heYFRIWHwdkLLD4JVtYzewEgr78Mzsv3WiC6BKjKPihk_z5zAHfqiHaimG7HQvBva0R4aM" />
+                            </div>
+                            <div>
+                                <div className="flex items-center gap-3 mb-1">
+                                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Jane Doe</h1>
+                                    <span className="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs px-2 py-0.5 rounded border border-slate-200 dark:border-slate-600 font-medium">ID: 84930</span>
+                                </div>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">Female, 45 yrs • DOB: Jan 12, 1979 • Blood Type: O+</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <button className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-medium transition-colors">
+                                <span className="material-symbols-outlined text-[20px]">print</span>
+                                Print Record
+                            </button>
+                            <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary-dark text-slate-900 text-sm font-bold transition-colors shadow-sm shadow-primary/20">
+                                <span className="material-symbols-outlined text-[20px]">edit_note</span>
+                                Add Note
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Vitals Bar */}
+                    <div className="px-6 py-3 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 flex overflow-x-auto custom-scrollbar gap-8">
+                        <div className="flex items-center gap-3 min-w-max">
+                            <div className="p-1.5 rounded bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+                                <span className="material-symbols-outlined text-[20px]">favorite</span>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Heart Rate</p>
+                                <p className="text-sm font-bold text-slate-900 dark:text-white">72 bpm</p>
+                            </div>
+                        </div>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 shrink-0"></div>
+                        <div className="flex items-center gap-3 min-w-max">
+                            <div className="p-1.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                                <span className="material-symbols-outlined text-[20px]">water_drop</span>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Blood Pressure</p>
+                                <p className="text-sm font-bold text-slate-900 dark:text-white">120/80 mmHg</p>
+                            </div>
+                        </div>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 shrink-0"></div>
+                        <div className="flex items-center gap-3 min-w-max">
+                            <div className="p-1.5 rounded bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                                <span className="material-symbols-outlined text-[20px]">monitor_weight</span>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Weight</p>
+                                <p className="text-sm font-bold text-slate-900 dark:text-white">68 kg</p>
+                            </div>
+                        </div>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 shrink-0"></div>
+                        <div className="flex items-center gap-3 min-w-max">
+                            <div className="p-1.5 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+                                <span className="material-symbols-outlined text-[20px]">height</span>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Height</p>
+                                <p className="text-sm font-bold text-slate-900 dark:text-white">165 cm</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Tabs Navigation */}
+                    <div className="px-6 flex gap-8 border-t border-slate-200 dark:border-slate-800">
+                        <a className="flex items-center gap-2 py-3 border-b-[3px] border-primary text-slate-900 dark:text-white font-semibold text-sm" href="#">
+                            <span className="material-symbols-outlined text-[20px]">overview</span>
+                            Overview
+                        </a>
+                        <a className="flex items-center gap-2 py-3 border-b-[3px] border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium text-sm transition-colors" href="#">
+                            <span className="material-symbols-outlined text-[20px]">description</span>
+                            Reports
+                        </a>
+                        <a className="flex items-center gap-2 py-3 border-b-[3px] border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium text-sm transition-colors" href="#">
+                            <span className="material-symbols-outlined text-[20px]">trending_up</span>
+                            Lab Trends
+                        </a>
+                        <a className="flex items-center gap-2 py-3 border-b-[3px] border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium text-sm transition-colors relative" href="#">
+                            <span className="material-symbols-outlined text-[20px] text-primary">auto_awesome</span>
+                            <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent font-bold">AI Summary</span>
+                        </a>
+                    </div>
+                </header>
+
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto p-6 scroll-smooth custom-scrollbar">
+                    <div className="max-w-[1400px] mx-auto space-y-6 pb-12">
+                        {/* AI Insight Card (Dismissible) */}
+                        <div className="bg-gradient-to-r from-slate-900 to-slate-800 dark:from-slate-800 dark:to-slate-900 rounded-xl p-5 shadow-lg relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button className="text-slate-400 hover:text-white transition-colors">
+                                    <span className="material-symbols-outlined">close</span>
+                                </button>
+                            </div>
+                            {/* Decorative Background Gradient */}
+                            <div className="absolute top-[-50%] left-[-10%] w-[30%] h-[200%] bg-primary/20 blur-[60px] rounded-full pointer-events-none"></div>
+                            <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start">
+                                <div className="p-3 bg-white/10 backdrop-blur-md rounded-lg text-primary shrink-0">
+                                    <span className="material-symbols-outlined text-[32px]">auto_awesome</span>
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <h3 className="text-lg font-bold text-white">AI Health Summary</h3>
+                                        <span className="bg-primary/20 text-primary text-[10px] uppercase font-bold px-2 py-0.5 rounded tracking-wide border border-primary/30">Beta</span>
+                                    </div>
+                                    <p className="text-slate-300 text-sm leading-relaxed max-w-4xl">
+                                        Patient shows consistent improvement in cholesterol levels over the last 3 months. However, a potential interaction has been flagged between
+                                        <span className="text-white font-semibold underline decoration-dotted decoration-slate-500"> Medication A</span> and
+                                        <span className="text-white font-semibold underline decoration-dotted decoration-slate-500"> Medication B</span>.
+                                        Recommended action: Review dosage or schedule separation.
+                                    </p>
+                                    <div className="flex gap-3 pt-2">
+                                        <button className="text-xs font-bold text-primary hover:text-white transition-colors flex items-center gap-1">
+                                            View Detailed Report <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                        </button>
+                                        <button className="text-xs font-bold text-slate-400 hover:text-slate-200 transition-colors">Dismiss</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Main Grid Layout */}
+                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                            {/* Left Column: Patient Snapshot & Medications (2/3 width on large screens) */}
+                            <div className="xl:col-span-2 space-y-6">
+                                {/* Allergies & Risk Factors */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Risk Factors */}
+                                    <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-lg p-5 flex flex-col gap-3">
+                                        <div className="flex items-center justify-between">
+                                            <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                                <span className="material-symbols-outlined text-green-500">shield_person</span>
+                                                Risk Assessment
+                                            </h3>
+                                            <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold px-2 py-1 rounded">Low Risk</span>
+                                        </div>
+                                        <p className="text-sm text-slate-500 dark:text-slate-400">Cardiovascular risk assessment remains low based on recent vitals and lifestyle changes.</p>
+                                        <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 mt-2">
+                                            <div className="bg-green-500 h-2 rounded-full w-[25%]"></div>
+                                        </div>
+                                        <div className="flex justify-between text-xs text-slate-400 mt-1">
+                                            <span>Low</span>
+                                            <span>Moderate</span>
+                                            <span>High</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Allergies */}
+                                    <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-lg p-5 flex flex-col gap-3">
+                                        <div className="flex items-center justify-between">
+                                            <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                                <span className="material-symbols-outlined text-red-500">warning</span>
+                                                Allergies
+                                            </h3>
+                                            <span className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold px-2 py-1 rounded">2 Critical</span>
+                                        </div>
+                                        <div className="space-y-2 mt-1">
+                                            <div className="flex items-center justify-between p-2 rounded bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                                                <span className="text-sm font-medium text-slate-800 dark:text-slate-200">Penicillin</span>
+                                                <span className="text-xs text-red-500 font-bold uppercase">Severe</span>
+                                            </div>
+                                            <div className="flex items-center justify-between p-2 rounded bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                                                <span className="text-sm font-medium text-slate-800 dark:text-slate-200">Peanuts</span>
+                                                <span className="text-xs text-orange-500 font-bold uppercase">Moderate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Current Medications */}
+                                <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
+                                    <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                                        <h3 className="font-bold text-slate-900 dark:text-white text-lg">Current Medications</h3>
+                                        <button className="text-primary hover:text-primary-dark text-sm font-semibold">Manage Prescriptions</button>
+                                    </div>
+                                    <div className="overflow-x-auto custom-scrollbar">
+                                        <table className="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">
+                                                    <th className="px-5 py-3 font-semibold">Medication</th>
+                                                    <th className="px-5 py-3 font-semibold">Dosage</th>
+                                                    <th className="px-5 py-3 font-semibold">Frequency</th>
+                                                    <th className="px-5 py-3 font-semibold text-right">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                                <tr>
+                                                    <td className="px-5 py-4">
+                                                        <p className="text-sm font-semibold text-slate-900 dark:text-white">Lisinopril</p>
+                                                        <p className="text-xs text-slate-500">ACE Inhibitor</p>
+                                                    </td>
+                                                    <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">10 mg</td>
+                                                    <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">Once Daily (Morning)</td>
+                                                    <td className="px-5 py-4 text-right">
+                                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                            Active
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="px-5 py-4">
+                                                        <p className="text-sm font-semibold text-slate-900 dark:text-white">Metformin</p>
+                                                        <p className="text-xs text-slate-500">Biguanide</p>
+                                                    </td>
+                                                    <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">500 mg</td>
+                                                    <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">Twice Daily</td>
+                                                    <td className="px-5 py-4 text-right">
+                                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                                            Active
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="px-5 py-4">
+                                                        <p className="text-sm font-semibold text-slate-900 dark:text-white">Amoxicillin</p>
+                                                        <p className="text-xs text-slate-500">Antibiotic</p>
+                                                    </td>
+                                                    <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">250 mg</td>
+                                                    <td className="px-5 py-4 text-sm text-slate-700 dark:text-slate-300">Every 8 Hours</td>
+                                                    <td className="px-5 py-4 text-right">
+                                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                                            Ending Soon
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                {/* Lab Trends Preview */}
+                                <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-lg p-5">
+                                    <div className="flex justify-between items-center mb-6">
+                                        <h3 className="font-bold text-slate-900 dark:text-white text-lg">Glucose Levels (Last 6 Months)</h3>
+                                        <div className="flex gap-2">
+                                            <button className="px-3 py-1 text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">7D</button>
+                                            <button className="px-3 py-1 text-xs font-bold bg-primary text-slate-900 rounded shadow-sm">1M</button>
+                                            <button className="px-3 py-1 text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">3M</button>
+                                            <button className="px-3 py-1 text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">6M</button>
+                                        </div>
+                                    </div>
+
+                                    {/* Simplified Chart Representation */}
+                                    <div className="h-64 w-full relative border-l border-b border-slate-200 dark:border-slate-700 pl-2 pb-2">
+                                        {/* Grid lines */}
+                                        <div className="absolute inset-0 flex flex-col justify-between text-xs text-slate-400 pointer-events-none">
+                                            <div className="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
+                                            <div className="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
+                                            <div className="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
+                                            <div className="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
+                                            <div className="w-full h-px bg-slate-100 dark:bg-slate-800"></div>
+                                        </div>
+
+                                        {/* Chart Line SVG */}
+                                        <svg className="w-full h-full absolute inset-0 z-10" preserveAspectRatio="none" viewBox="0 0 100 50">
+                                            {/* Area Fill */}
+                                            <path className="fill-primary/10 stroke-none" d="M0,50 L0,35 L20,30 L40,38 L60,25 L80,28 L100,20 L100,50 Z"></path>
+                                            {/* Stroke Line */}
+                                            <path d="M0,35 L20,30 L40,38 L60,25 L80,28 L100,20" fill="none" stroke="#13ecec" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" vectorEffect="non-scaling-stroke"></path>
+                                            {/* Points */}
+                                            <circle className="fill-primary stroke-white stroke-[0.5]" cx="20" cy="30" r="0.8"></circle>
+                                            <circle className="fill-primary stroke-white stroke-[0.5]" cx="40" cy="38" r="0.8"></circle>
+                                            <circle className="fill-primary stroke-white stroke-[0.5]" cx="60" cy="25" r="0.8"></circle>
+                                            <circle className="fill-primary stroke-white stroke-[0.5]" cx="80" cy="28" r="0.8"></circle>
+                                            <circle className="fill-primary stroke-white stroke-[0.5]" cx="100" cy="20" r="0.8"></circle>
+                                        </svg>
+
+                                        {/* Hover Tooltip simulation */}
+                                        <div className="absolute top-[28%] left-[60%] bg-slate-900 text-white text-xs py-1 px-2 rounded -translate-x-1/2 -translate-y-full mb-2 shadow-lg z-20">
+                                            98 mg/dL
+                                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-slate-900 rotate-45"></div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex justify-between text-xs text-slate-400 mt-2 px-1">
+                                        <span>Jan</span>
+                                        <span>Feb</span>
+                                        <span>Mar</span>
+                                        <span>Apr</span>
+                                        <span>May</span>
+                                        <span>Jun</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right Column: Recent Activity & Notes (1/3 width) */}
+                            <div className="space-y-6">
+                                {/* Recent Activity / Timeline */}
+                                <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-lg p-5">
+                                    <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-4">Recent Visits</h3>
+                                    <div className="relative pl-4 border-l-2 border-slate-100 dark:border-slate-800 space-y-6">
+                                        {/* Item 1 */}
+                                        <div className="relative">
+                                            <div className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-primary border-2 border-white dark:border-slate-850"></div>
+                                            <div className="flex flex-col gap-1">
+                                                <div className="flex justify-between items-start">
+                                                    <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-100">Routine Check-up</h4>
+                                                    <span className="text-xs text-slate-400">Today</span>
+                                                </div>
+                                                <p className="text-xs text-slate-500">Dr. Smith • Cardiology</p>
+                                                <p className="text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 p-2 rounded mt-1 border border-slate-100 dark:border-slate-700">
+                                                    BP slightly elevated. Patient reports reduced exercise.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Item 2 */}
+                                        <div className="relative">
+                                            <div className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-slate-300 dark:bg-slate-600 border-2 border-white dark:border-slate-850"></div>
+                                            <div className="flex flex-col gap-1">
+                                                <div className="flex justify-between items-start">
+                                                    <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-100">Lab Results Review</h4>
+                                                    <span className="text-xs text-slate-400">Nov 12</span>
+                                                </div>
+                                                <p className="text-xs text-slate-500">Dr. Adams • Internal Med</p>
+                                                <div className="mt-1">
+                                                    <span className="inline-flex items-center gap-1 text-[10px] bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded">
+                                                        <span className="material-symbols-outlined text-[10px]">attach_file</span>
+                                                        Blood Panel
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Item 3 */}
+                                        <div className="relative">
+                                            <div className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-slate-300 dark:bg-slate-600 border-2 border-white dark:border-slate-850"></div>
+                                            <div className="flex flex-col gap-1">
+                                                <div className="flex justify-between items-start">
+                                                    <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-100">Emergency Visit</h4>
+                                                    <span className="text-xs text-slate-400">Oct 03</span>
+                                                </div>
+                                                <p className="text-xs text-slate-500">Dr. Green • ER</p>
+                                                <p className="text-xs text-slate-500 italic">Chief complaint: Chest pain</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="w-full mt-6 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                        View Full History
+                                    </button>
+                                </div>
+
+                                {/* Sticky Note / Quick Note */}
+                                <div className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-lg p-5">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <h3 className="font-bold text-yellow-800 dark:text-yellow-500 flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[20px]">sticky_note_2</span>
+                                            Clinical Notes
+                                        </h3>
+                                        <button className="text-yellow-800 dark:text-yellow-500 hover:text-yellow-900 dark:hover:text-yellow-400">
+                                            <span className="material-symbols-outlined text-[20px]">edit</span>
+                                        </button>
+                                    </div>
+                                    <p className="text-sm text-yellow-900/80 dark:text-yellow-100/70 font-medium leading-relaxed">
+                                        "Patient mentioned feeling dizzy after taking morning meds. Monitor BP closely next visit. Needs referral for nutritionist regarding sugar intake."
+                                    </p>
+                                    <p className="text-xs text-yellow-700 dark:text-yellow-500 mt-3 text-right">- Dr. Smith, 2 hours ago</p>
+                                </div>
+
+                                {/* Attachments / Downloads */}
+                                <div className="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-lg p-5">
+                                    <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-4">Recent Documents</h3>
+                                    <ul className="space-y-3">
+                                        <li className="flex items-center justify-between group cursor-pointer p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded transition-colors">
+                                            <div className="flex items-center gap-3">
+                                                <div className="bg-red-50 text-red-600 p-2 rounded">
+                                                    <span className="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-medium text-slate-800 dark:text-slate-200">Blood Test Results.pdf</p>
+                                                    <p className="text-xs text-slate-500">12 Nov 2023 • 2.4 MB</p>
+                                                </div>
+                                            </div>
+                                            <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">download</span>
+                                        </li>
+                                        <li className="flex items-center justify-between group cursor-pointer p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded transition-colors">
+                                            <div className="flex items-center gap-3">
+                                                <div className="bg-blue-50 text-blue-600 p-2 rounded">
+                                                    <span className="material-symbols-outlined text-[20px]">image</span>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-medium text-slate-800 dark:text-slate-200">X-Ray Chest.jpg</p>
+                                                    <p className="text-xs text-slate-500">03 Oct 2023 • 5.1 MB</p>
+                                                </div>
+                                            </div>
+                                            <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">download</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    );
+};
+
+export default DoctorFullPatientRecordView;
