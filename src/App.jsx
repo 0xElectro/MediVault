@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { PatientProvider } from './context/PatientContext';
 import ProfessionalLanding from './pages/ProfessionalLanding';
 import ClinicalDeepDive from './pages/ClinicalDeepDive';
 import AuthPage from './pages/AuthPage';
@@ -10,15 +11,14 @@ import UploadRecords from './pages/UploadRecords';
 import Appointments from './pages/Appointments';
 import PrescriptionsOverview from './pages/PrescriptionsOverview';
 import PrescriptionDetail from './pages/PrescriptionDetail';
-<<<<<<< HEAD
+import PatientAccountSettings from './pages/PatientAccountSettings';
+import PatientHelpSupport from './pages/PatientHelpSupport';
 import DoctorDashboard from './pages/DoctorDashboard';
 import DoctorEmergencyPatientView from './pages/DoctorEmergencyPatientView';
 import DoctorFullPatientRecordView from './pages/DoctorFullPatientRecordView';
 import DoctorQRScanner from './pages/DoctorQRScanner';
 import DoctorProfileSettings from './pages/DoctorProfileSettings';
 import DoctorSecureLogin from './pages/DoctorSecureLogin';
-=======
->>>>>>> 25ab03952d4598e671e161afa5508ea36a07c8db
 
 function App() {
   return (
@@ -30,21 +30,24 @@ function App() {
         <Route path="/register" element={<AuthPage initialMode="register" />} />
         <Route path="/provider-login" element={<ProviderAuthPage initialMode="login" />} />
         <Route path="/provider-register" element={<ProviderAuthPage initialMode="register" />} />
-        <Route path="/dashboard" element={<PatientDashboard />} />
-        <Route path="/records" element={<MyRecords />} />
-        <Route path="/upload-record" element={<UploadRecords />} />
-        <Route path="/appointments" element={<Appointments />} />
-        <Route path="/prescriptions" element={<PrescriptionsOverview />} />
-        <Route path="/prescriptions/:id" element={<PrescriptionDetail />} />
-<<<<<<< HEAD
+        
+        {/* Patient Routes wrapped in Provider */}
+        <Route path="/dashboard" element={<PatientProvider><PatientDashboard /></PatientProvider>} />
+        <Route path="/records" element={<PatientProvider><MyRecords /></PatientProvider>} />
+        <Route path="/upload-record" element={<PatientProvider><UploadRecords /></PatientProvider>} />
+        <Route path="/appointments" element={<PatientProvider><Appointments /></PatientProvider>} />
+        <Route path="/prescriptions" element={<PatientProvider><PrescriptionsOverview /></PatientProvider>} />
+        <Route path="/prescriptions/:id" element={<PatientProvider><PrescriptionDetail /></PatientProvider>} />
+        <Route path="/account-settings" element={<PatientProvider><PatientAccountSettings /></PatientProvider>} />
+        <Route path="/help-support" element={<PatientProvider><PatientHelpSupport /></PatientProvider>} />
+
+        {/* Doctor Routes */}
         <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
         <Route path="/doctor-emergency" element={<DoctorEmergencyPatientView />} />
         <Route path="/doctor-patient-record" element={<DoctorFullPatientRecordView />} />
         <Route path="/doctor-qr-scanner" element={<DoctorQRScanner />} />
         <Route path="/doctor-profile-settings" element={<DoctorProfileSettings />} />
         <Route path="/doctor-login" element={<DoctorSecureLogin />} />
-=======
->>>>>>> 25ab03952d4598e671e161afa5508ea36a07c8db
       </Routes>
     </Router>
   );

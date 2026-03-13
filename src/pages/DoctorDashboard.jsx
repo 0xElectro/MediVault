@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const DoctorDashboard = () => {
     return (
@@ -19,27 +20,27 @@ const DoctorDashboard = () => {
 
                     {/* Navigation Links */}
                     <nav className="flex flex-col gap-1.5">
-                        <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-teal-900 dark:text-primary font-medium group transition-colors" href="#">
+                        <Link to="/doctor-dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-teal-900 dark:text-primary font-medium group transition-colors">
                             <span className="material-symbols-outlined text-teal-700 dark:text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>dashboard</span>
                             Dashboard
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group" href="#">
+                        </Link>
+                        <Link to="/doctor-patient-record" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group">
                             <span className="material-symbols-outlined group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">group</span>
                             Patients
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group" href="#">
+                        </Link>
+                        <Link to="#" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group">
                             <span className="material-symbols-outlined group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">calendar_month</span>
                             Schedule
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group" href="#">
+                        </Link>
+                        <Link to="#" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group">
                             <span className="material-symbols-outlined group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">chat_bubble</span>
                             Messages
                             <span className="ml-auto bg-red-100 text-red-600 text-xs font-bold px-2 py-0.5 rounded-full">3</span>
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group" href="#">
+                        </Link>
+                        <Link to="/doctor-profile-settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors group">
                             <span className="material-symbols-outlined group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">settings</span>
                             Settings
-                        </a>
+                        </Link>
                     </nav>
                 </div>
 
@@ -72,10 +73,10 @@ const DoctorDashboard = () => {
                     {/* Right Actions */}
                     <div className="flex items-center gap-4 ml-6">
                         {/* Emergency Mode Toggle */}
-                        <button className="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-all shadow-sm">
+                        <Link to="/doctor-emergency" className="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-all shadow-sm">
                             <span className="material-symbols-outlined text-xl animate-pulse">e911_emergency</span>
                             <span className="text-sm font-bold tracking-wide">EMERGENCY MODE</span>
-                        </button>
+                        </Link>
 
                         {/* Notifications */}
                         <button className="relative p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
@@ -99,7 +100,8 @@ const DoctorDashboard = () => {
                             {/* Quick Action Cards */}
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {/* Card 1: Scan Patient (Primary Action) */}
-                                <div className="bg-gradient-to-br from-primary to-cyan-400 p-1 rounded-xl shadow-lg shadow-primary/20 group cursor-pointer hover:scale-[1.02] transition-transform">
+                                {/* Card 1: Scan Patient (Primary Action) */}
+                                <Link to="/doctor-qr-scanner" className="bg-gradient-to-br from-primary to-cyan-400 p-1 rounded-xl shadow-lg shadow-primary/20 group cursor-pointer hover:scale-[1.02] transition-transform block">
                                     <div className="bg-surface-light/20 dark:bg-surface-dark/10 h-full p-5 flex flex-col justify-between backdrop-blur-sm rounded-lg">
                                         <div className="p-3 bg-white/20 w-fit rounded-lg mb-4 text-white">
                                             <span className="material-symbols-outlined text-3xl">qr_code_scanner</span>
@@ -109,7 +111,7 @@ const DoctorDashboard = () => {
                                             <h3 className="text-white text-xl font-bold">Scan Patient QR</h3>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
 
                                 {/* Card 2: Pending Requests */}
                                 <div className="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between group hover:border-primary/50 transition-colors cursor-pointer">
